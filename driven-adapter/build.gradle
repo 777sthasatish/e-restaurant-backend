@@ -4,6 +4,7 @@ version = '0.0.1-SNAPSHOT'
 dependencies {
 	implementation(
 			sql.dataJPA,
+			security.oauth2Auto,
 			project(":domain"),
 	)
 	runtimeOnly sql.mySQL

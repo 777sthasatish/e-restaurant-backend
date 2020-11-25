@@ -23,6 +23,8 @@ ext {
 
     /**Example:spring security, OAuth2 client, OAuth2 resource server, spring ldap, Okta**/
     security = [
+            starterSecurity: 'org.springframework.boot:spring-boot-starter-security',
+            oauth2Auto: "org.springframework.cloud:spring-cloud-starter-oauth2",
     ]
 
     /**Example:jdbc api, spring data jpa, spring data jdbc, spring data r2dbc, MyBatis framework, liquibase migration, flyway migration,
@@ -60,6 +62,7 @@ ext {
     ]
 
     validation = [
+            javax: "javax.validation:validation-api:$javaxValidation"
     ]
 
     /**Anything besides above category**/

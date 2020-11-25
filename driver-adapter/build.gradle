@@ -3,9 +3,11 @@ version = '0.0.1-SNAPSHOT'
 
 dependencies {
 	implementation(
+			security.oauth2Auto,
+			security.starterSecurity,
 			web.springDataRest,
 			web.starterWeb,
+			validation.javax,
 			project(":domain"),
 	)
 }
-
