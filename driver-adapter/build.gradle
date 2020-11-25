@@ -1,0 +1,11 @@
+group = 'com.cotiviti.e-restaurant-backend.driver-adapter'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+	implementation(
+			web.springDataRest,
+			web.starterWeb,
+			project(":domain"),
+	)
+}
+

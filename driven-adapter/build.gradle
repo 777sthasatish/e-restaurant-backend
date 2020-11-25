@@ -1,0 +1,10 @@
+group = 'com.cotiviti.e-restaurant-backend.driven-adapter'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+	implementation(
+			sql.dataJPA,
+			project(":domain"),
+	)
+	runtimeOnly sql.mySQL
+}
