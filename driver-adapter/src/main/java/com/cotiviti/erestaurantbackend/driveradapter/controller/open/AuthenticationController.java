@@ -1,4 +1,4 @@
-package com.cotiviti.erestaurantbackend.driveradapter.controller;
+package com.cotiviti.erestaurantbackend.driveradapter.controller.open;
 
 import com.cotiviti.erestaurantbackend.domain.port.driver.AuthenticationUseCase;
 import com.cotiviti.erestaurantbackend.driveradapter.dto.AuthenticatorDTO;

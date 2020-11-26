@@ -9,5 +9,10 @@ dependencies {
 			web.starterWeb,
 			validation.javax,
 			project(":domain"),
+			local.fieldValidatorMVCAdapter,
+			local.fieldValidatorDomain,
+			local.fieldValidatorUI,
+			local.fieldValidatorWebCore,
+			local.fieldValidatorRestAdapter
 	)
 }

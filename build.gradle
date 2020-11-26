@@ -20,6 +20,17 @@ allprojects {
 	targetCompatibility = 11
 
 	repositories {
+		maven {
+			url "https://gitlab.com/api/v4/groups/10170188/-/packages/maven"
+			name "GitLab"
+			credentials(HttpHeaderCredentials) {
+				name = 'Private-Token'
+				value = gitLabPrivateToken
+			}
+			authentication {
+				header(HttpHeaderAuthentication)
+			}
+		}
 		jcenter()
 		mavenCentral()
 	}
@@ -52,7 +63,8 @@ subprojects {
 
 	dependencies {
 		implementation (
-				developerTool.mapStruct
+				developerTool.mapStruct,
+				local.satishCommon
 		)
 		compileOnly developerTool.lombok
 		annotationProcessor (

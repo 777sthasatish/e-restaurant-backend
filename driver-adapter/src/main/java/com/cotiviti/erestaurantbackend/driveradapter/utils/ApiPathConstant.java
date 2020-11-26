@@ -10,4 +10,9 @@ public final class ApiPathConstant {
 
     public final static String LOGIN = "/login";
 
+    public final static String FIELD = "/fields";
+
+    public final static String MENU = "/menus";
+
+
 }

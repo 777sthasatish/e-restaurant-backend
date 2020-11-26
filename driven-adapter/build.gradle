@@ -6,6 +6,9 @@ dependencies {
 			sql.dataJPA,
 			security.oauth2Auto,
 			project(":domain"),
+			local.fieldValidatorJPAAdapter,
+			local.fieldValidatorDomain,
+			local.fieldValidatorWebCore
 	)
 	runtimeOnly sql.mySQL
 }
