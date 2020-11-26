@@ -21,7 +21,7 @@ public class Menu extends Identity<Integer> {
     @Column(nullable = false)
     private boolean enabled;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "\"order\"",nullable = false, unique = true)
     private int order;
 
     @Column

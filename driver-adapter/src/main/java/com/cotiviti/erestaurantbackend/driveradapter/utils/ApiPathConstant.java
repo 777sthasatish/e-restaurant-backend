@@ -14,5 +14,7 @@ public final class ApiPathConstant {
 
     public final static String MENU = "/menus";
 
-
+    public final static String FOOD_MENU = "/foodsMenu";
+    
+    public final static String TABLE = "/tables";
 }
