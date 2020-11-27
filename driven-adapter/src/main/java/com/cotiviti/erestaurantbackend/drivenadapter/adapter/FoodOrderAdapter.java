@@ -31,21 +31,29 @@ public class FoodOrderAdapter implements FoodOrderRepoPort {
         return foodOrderMapper.toModel(foodOrderRepository.save(foodOrder));
     }
 
+    @Override
+    public List<FoodOrderModel> getAllPending() {
+        return foodOrderMapper.toModels(foodOrderRepository.getAllPending());
+    }
+
+    @Override
+    public List<FoodOrderModel> getAllPendingBy(String id) {
+        var test = foodOrderRepository.getAllPendingBy(id);
+        return foodOrderMapper.toModels(foodOrderRepository.getAllPendingBy(id));
+    }
+
     private Billing saveBilling(FoodOrderModel foodOrderModel) {
-        List<FoodOrder> foodOrders = foodOrderRepository.getPendingBillOf(foodOrderModel.getTable().getId());
-        if(!foodOrders.isEmpty()) {
-            return updateBill(billsSum(foodOrders),foodOrders.get(0).getBilling().getId());
+        Optional<FoodOrder> optionalFoodOrder = foodOrderRepository.getPendingBillOf(foodOrderModel.getTable().getId());
+        if(optionalFoodOrder.isPresent()) {
+            FoodOrder foodOrder = optionalFoodOrder.get();
+            Billing billing = foodOrder.getBilling();
+            double total = billing.getTotal() + (foodOrderModel.getQuantity() * foodOrderModel.getFoodMenu().getPrice());
+            billing.setTotal(total);
+            return billing;
         } else {
             final double total = foodOrderModel.getQuantity() * foodOrderModel.getFoodMenu().getPrice();
             return addBill(total);
         }
-    }
-
-    private double billsSum(List<FoodOrder> foodOrders) {
-        return foodOrders
-                .stream()
-                .mapToDouble(value -> value.getFoodMenu().getPrice() * value.getQuantity())
-                .reduce(0, Double::sum);
     }
 
     private Billing addBill(double total) {
@@ -56,12 +64,8 @@ public class FoodOrderAdapter implements FoodOrderRepoPort {
     }
 
     private Billing updateBill(double total, long billId) {
-        Optional<Billing> optionalBilling = billingRepository.findById(billId);
-        Billing billing = new Billing();
-        if(optionalBilling.isPresent()) {
-            billing = optionalBilling.get();
-            billing.setTotal(billing.getTotal() + total);
-        }
+        Billing billing = billingRepository.findById(billId).orElse(new Billing());
+        billing.setTotal(total);
         return billing;
     }
 }

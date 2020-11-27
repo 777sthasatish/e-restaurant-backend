@@ -5,11 +5,11 @@ import com.cotiviti.erestaurantbackend.driveradapter.dto.FoodOrderDTO;
 import com.cotiviti.erestaurantbackend.driveradapter.mapper.FoodOrderMapper;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.cotiviti.erestaurantbackend.driveradapter.utils.ApiPathConstant.*;
 
@@ -26,5 +26,15 @@ public class FoodOrderController {
         return ResponseEntity.ok(
               this.foodOrderMapper.toDTO(this.foodOrderUseCase.add(this.foodOrderMapper.toModel(foodOrderDTO)))
         );
+    }
+
+    @GetMapping
+    public ResponseEntity<List<FoodOrderDTO>> getAllPending() {
+        return ResponseEntity.ok(foodOrderMapper.toDTOs(foodOrderUseCase.getAllPending()));
+    }
+
+    @GetMapping(ID_PATH)
+    public ResponseEntity<List<FoodOrderDTO>> getAllBy(@PathVariable String id) {
+        return ResponseEntity.ok(foodOrderMapper.toDTOs(foodOrderUseCase.getAllPendingBy(id)));
     }
 }
