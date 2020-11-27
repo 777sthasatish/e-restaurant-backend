@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface FoodOrderRepository extends JpaRepository<FoodOrder, Long> {
     @Query(
-            value = "SELECT fo.`*`, b.id, b.payment_date, b.status, SUM(total) AS total from tbl_food_order fo\n" +
+            value = "SELECT fo.id, fo.quantity, fo.table_id, fo.food_menu_id, fo.bill_id, fo.order_date, b.id, b.payment_date, b.status, SUM(total) AS total from tbl_food_order fo\n" +
                     "INNER JOIN tbl_billing b\n" +
                     "ON b.id = fo.bill_id\n" +
                     "WHERE fo.table_id = :tableId\n" +
@@ -22,7 +22,7 @@ public interface FoodOrderRepository extends JpaRepository<FoodOrder, Long> {
     Optional<FoodOrder> getPendingBillOf(@Param("tableId") long tableId);
 
     @Query(
-            value = "SELECT fo.`*`, b.id, b.payment_date, b.status, SUM(total) AS total from tbl_food_order fo\n" +
+            value = "SELECT fo.id, fo.quantity, fo.table_id, fo.food_menu_id, fo.bill_id, fo.order_date, b.id, b.payment_date, b.status, SUM(total) AS total from tbl_food_order fo\n" +
                     "INNER JOIN tbl_billing b\n" +
                     "ON b.id = fo.bill_id\n" +
                     "AND b.status = FALSE\n" +
@@ -32,7 +32,7 @@ public interface FoodOrderRepository extends JpaRepository<FoodOrder, Long> {
     List<FoodOrder> getAllPending();
 
     @Query(
-            value = "SELECT fo.`*`, b.id, b.payment_date, b.status, SUM(total) AS total from tbl_food_order fo\n" +
+            value = "SELECT fo.id, fo.quantity, fo.table_id, fo.food_menu_id, fo.bill_id, fo.order_date, b.id, b.payment_date, b.status, SUM(total) AS total from tbl_food_order fo\n" +
                     "INNER JOIN tbl_billing b\n" +
                     "ON b.id = fo.bill_id\n" +
                     "AND b.status = FALSE\n" +
@@ -69,7 +69,7 @@ public interface FoodOrderRepository extends JpaRepository<FoodOrder, Long> {
     long todaysRevenue();
 
     @Query(
-            value = "SELECT COUNT(*) AS menuCount, fo.`*` from tbl_food_order fo\n" +
+            value = "SELECT COUNT(*) AS menuCount, fo.id, fo.quantity, fo.table_id, fo.food_menu_id, fo.bill_id, fo.order_date from tbl_food_order fo\n" +
                     "INNER JOIN tbl_billing b\n" +
                     "ON b.id = fo.bill_id\n" +
                     "WHERE  b.payment_date = CURDATE()\n" +
