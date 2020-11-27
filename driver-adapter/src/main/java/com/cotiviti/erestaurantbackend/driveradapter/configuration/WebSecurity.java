@@ -19,4 +19,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     }
+
+    @Override
+    public void init(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
+        super.init(web);
+        web.ignoring().antMatchers( "/fieldValidatorUI/**", "/css/**", "/js/**");
+    }
 }

@@ -7,21 +7,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name ="tbl_food_menu")
+@Table(name = "tbl_billing")
 @Data
-public class FoodMenu extends Identity<Long> {
+public class Billing extends Identity<Long> {
 
-    @Column(nullable = false, unique = true)
-    private String name;
-
-    @Column(length = 10)
-    private String prepTime;
+    @Column(nullable = false)
+    private double total;
 
     @Column
-    private double price;
+    private Date paymentDate;
 
     @Column
     private boolean status;
+
+//    @OneToMany(mappedBy = "billing")
+//    private List<FoodOrder> foodOrders;
 }
